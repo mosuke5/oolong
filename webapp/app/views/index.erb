@@ -1,4 +1,5 @@
-<h1>Humility and Temperature in your room</h1>
-<% @humidity.each do |h| %>
-    <li><%= h.humidity %></li>
-<% end%>
+<h1>Humility and Teperature in your room.</h1>
+<div id="humility-graph">
+</div>
+<%= erb :'graph/humidity_temperature' %> 
+

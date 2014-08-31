@@ -4,9 +4,7 @@ require 'sinatra/reloader'
 
 # 独自ファイル
 require '../db/database'
-
-# public フォルダーのパス指定
-set :public_folder, File.expand_path('../public')
+require '../config/myconf'
 
 before do
     # 共通変数
@@ -20,6 +18,5 @@ end
 get '/' do
     #湿度データ取得
     @humidity = Measurement_data2.order("id desc").all
-
-    erb :graph
+    erb :index
 end

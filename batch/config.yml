@@ -1,0 +1,12 @@
+sftp:
+    host: mosuke.me
+    user: shinya.mori
+    remote_path: /home/shinya.mori/data/ 
+    local_path: /Users/shinya/test/oolong/batch/data/
+db:
+    development:
+        adapter:  'mysql2'
+        host:     'localhost'
+        username: 'root'
+        password: ''
+        database: 'oolong'

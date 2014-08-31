@@ -1,0 +1,123 @@
+<style>
+.axis path,
+.axis line{
+    fill: none;
+    stroke: white;
+}
+
+/*
+.tick text{
+    stroke:white;
+    font-size: 12px;
+}
+*/
+
+.x text{
+    stroke:white;
+    font-size:12px;
+}
+
+.y0 text{
+    stroke:#00bc8c;
+    font-size:12px;
+}
+
+.y1 text{
+    stroke:#f39c12;
+    font-size:12px;
+}
+
+.line-humidity{
+    fill: none;
+    stroke: #00bc8c;
+    stroke-width: 2px;
+}
+
+.line-temperature{
+    fill: none;
+    stroke: #f39c12;
+    stroke-width: 2px;
+}
+</style>
+<script>
+
+var margin = {top: 20, right: 100, bottom: 30, left: 100},
+    width = 1100 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var dataset = [
+<% @humidity.each do |h| %>
+    {x:<%= h.measured_date%>-<%= h.measured_time%>, y0:<%= h.humidity %>, y1:<%= h.temperature %>},
+<% end %>
+];
+
+//x軸のDatetime表記
+var parseDatetime = d3.time.format("%Y-%m-%d-%H").parse;
+
+/*
+var xScale = d3.scale.linear()
+    .domain([1, d3.max(dataset, function(d){ return d.x; })])
+    .range([0, width]);
+*/
+
+var xScale = d3.time.scale()
+    .range([0, width]);
+
+var y0Scale = d3.scale.linear()
+    .domain([0, d3.max(dataset, function(d){ return d.y0; })])
+    .range([height, 0]);
+
+var y1Scale = d3.scale.linear()
+    .domain([0, d3.max(dataset, function(d){ return d.y1; })])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+
+var y0Axis = d3.svg.axis()
+    .scale(y0Scale)
+    .orient("left");
+
+var y1Axis = d3.svg.axis()
+    .scale(y1Scale)
+    .orient("right");
+
+var line_humidity = d3.svg.line()
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return y0Scale(d.y0); });
+
+var line_temperature = d3.svg.line()
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return y1Scale(d.y1); });
+
+var svg = d3.select("#humility-graph").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+
+svg.append("g")
+    .attr("class", "y0 axis")
+    .call(y0Axis)
+
+svg.append("g")
+    .attr("class", "y1 axis")
+    .attr("transform", "translate(" + width + ",0)")
+    .call(y1Axis)
+
+svg.append("path")
+    .datum(dataset)
+    .attr("class", "line-humidity")
+    .attr("d", line_humidity(dataset));
+
+svg.append("path")
+    .datum(dataset)
+    .attr("class", "line-temperature")
+    .attr("d", line_temperature(dataset));
+</script>
