@@ -1,4 +1,6 @@
-oolong
+oolong(ArduinoとSinatraを使った温度湿度計)
 ======
 
-Arduino+Sinatra
+##機器の仕様
+  ・温度と湿度のデータが測定できること
+  ・サーバへ上記情報を定期的に送信できること
