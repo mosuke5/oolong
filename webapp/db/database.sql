@@ -1,16 +1,9 @@
+#計測データ格納テーブル
 CREATE TABLE measurement_data (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    measured_at TIMESTAMP,
+    machine_id int NOT NULL,
+    measured_date datetime NOT NULL,
     humidity DOUBLE,
     temperature DOUBLE,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE measurement_data2 (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    measured_date DATE,
-    measured_time INT(11),
-    humidity DOUBLE,
-    temperature DOUBLE,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at datetime DEFAULT CURRENT_TIMESTAMP
 );

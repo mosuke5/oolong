@@ -2,3 +2,7 @@
 *~
 *.swp
 Gemfile.lock
+
+webapp/logs/*
+webapp/config/myconf.rb
+webapp/db/database.yml

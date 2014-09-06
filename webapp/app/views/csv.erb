@@ -1,0 +1,8 @@
+<% @m_data.each do |d| %>
+    <%= d.id %>,
+    <%= d.measured_date.to_s %>,
+    <%= d.humidity %>,
+    <%= d.temperature %>,
+    <%= d.created_at.to_s %>
+    \n
+<% end %>
