@@ -34,6 +34,11 @@ get '/' do
 
     #machine idはデフォルトで自分用の1にしておく
     @machine_id = 1
+    
+    #全てのデータ
+    @all_data   = Measurement_data.order("id desc").where(:machine_id=>@machine_id)
+
+    #直近の温度・湿度情報取得
 
     erb :index
 
@@ -71,3 +76,28 @@ get '/getdata/:machine_id' do |id|
 
     erb :csv, :layout => false
 end
+
+get '/humidity/:machine_id' do |id|
+    
+    content_type 'application/csv'
+    attachment 'humidity.csv'
+
+    #湿度データ取得
+    @m_data   = Measurement_data.select("id,measured_date,humidity as value").order("id desc").where(:machine_id=>id)
+    @m_header = "id,date,value\n"
+
+    erb :csv, :layout => false
+end
+
+get '/temperature/:machine_id' do |id|
+    
+    content_type 'application/csv'
+    attachment 'temperature.csv'
+
+    #湿度データ取得
+    @m_data   = Measurement_data.select("id,measured_date,temperature as value").order("id desc").where(:machine_id=>id)
+    @m_header = "id,date,value\n"
+
+    erb :csv, :layout => false
+end
+

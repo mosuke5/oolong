@@ -14,3 +14,21 @@ html {
    /* Set the fixed height of the footer here */
     height: 60px;
 }
+
+.latest-area{
+    margin-bottom:30px;
+}
+
+.latest-info{
+    float:left;
+    font-size:30px;
+}
+
+
+#index-humidity-graph{
+    float:left;
+}
+
+#index-temperature-graph{
+    float:right;
+}

@@ -1,4 +1,52 @@
-<h1>Humility and Teperature in your room.</h1>
-<div id="humility-graph">
+<h1 class="page-header">Humidity and Teperature in mosuke's room.</h1>
+<!-- 直近の情報 -->
+<div class="latest-area">
+    <h4>Latest</h4>
+    <div class="latest-info latest-icon">
+        <img src="img/sunny_s_cloudy.png">
+    </div>
+    <div class="latest-info latest-humidity">
+        <span class="latest-value">63%</span>
+    </div>
+    <div class="latest-info latest-temperature">
+        <span class="latest-value">23℃</span>
+    </div>
+    <div class="clearfix"></div>
 </div>
-<%= erb :'graph/test' %> 
+
+<div class="graph-area">
+    <h4>Transitions</h4>
+    <!-- 湿度のグラフ -->
+    <div id="index-humidity-graph">
+        <div>湿度グラフ</div>
+    </div>
+    
+    <!-- 温度のグラフ -->
+    <div id="index-temperature-graph">
+        <div>温度グラフ</div>
+    </div>
+</div>
+
+<!-- グラフ描画js -->
+<%= erb :'graph/index' %> 
+
+<div class="data-area">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Humidity</th>
+                <th>Temperature</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @all_data.each do |d| %>
+                <tr>
+                    <th><%= d.measured_date %></th>
+                    <th><%= d.humidity %></th>
+                    <th><%= d.temperature %></th>
+                <tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
