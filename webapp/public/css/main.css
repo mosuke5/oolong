@@ -1,6 +1,12 @@
+/* Layout
+---------------------------------------------------*/
 html {
     position: relative;
     min-height: 100%;
+}
+
+body{
+    margin-bottom:60px;
 }
 
 .main-body{
@@ -11,19 +17,24 @@ html {
     position: absolute;
     bottom: 0;
     width: 100%;
-   /* Set the fixed height of the footer here */
     height: 60px;
 }
 
+
+/* Detail
+---------------------------------------------------*/
 .latest-area{
     margin-bottom:30px;
 }
 
 .latest-info{
     float:left;
-    font-size:30px;
+    height:67px;
 }
 
+.latest-value{
+    font-size:32px;
+}
 
 #index-humidity-graph{
     float:left;

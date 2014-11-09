@@ -101,3 +101,20 @@ get '/temperature/:machine_id' do |id|
     erb :csv, :layout => false
 end
 
+get '/csvtest' do
+    
+    content_type 'application/csv'
+    attachment 'temperature.csv'
+
+    #湿度データ取得
+    @m_data   = Measurement_data.select("id,measured_date,temperature as value").order("id desc").where(:machine_id=>1)
+    @m_header = "id,date,value\n"
+    
+    @csv = "id,date,value\n"
+    @m_data.each do |d|
+        @csv += d.measured_date.to_s + "," + d.value.to_s + "\n"
+    end
+
+    erb :csvtest, :layout => false
+end
+
